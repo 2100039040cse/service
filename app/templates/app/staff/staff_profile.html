@@ -1,0 +1,12 @@
+<h2>Welcome to the Staff Profile</h2>
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<p>Hello, {{ user.username }} (Staff)!</p>
+<p>Your email: {{ user.email }}</p>
+<p><a href="{% url 'staff_edit_profile' %}">Edit Profile</a></p>
+<p><a href="{% url 'logout' %}">Logout</a></p>

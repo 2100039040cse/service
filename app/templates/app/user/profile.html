@@ -1,0 +1,15 @@
+<h2>Welcome to Your Profile</h2>
+
+<!-- Display messages -->
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<p>Hello, {{ user.username }}!</p>
+<p>Your email: {{ user.email }}</p>
+<p><a href="{% url 'edit_profile' %}">Edit Profile</a></p>
+<p><a href="{% url 'logout' %}">Logout</a></p>

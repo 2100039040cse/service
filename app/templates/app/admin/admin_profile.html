@@ -1,0 +1,13 @@
+<h2>Welcome to the Admin Profile</h2>
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<p>Hello, {{ user.username }} (Admin)!</p>
+<p>Your email: {{ user.email }}</p>
+<p><a href="{% url 'admin_edit_profile' %}">Edit Profile</a></p>
+<p><a href="{% url 'users_list' %}">Users List</a></p>
+<p><a href="{% url 'logout' %}">Logout</a></p>

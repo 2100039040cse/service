@@ -1,0 +1,50 @@
+<h2>Users List</h2>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% if user.is_active %}
+                    Enabled
+                {% else %}
+                    Disabled
+                {% endif %}
+            </td>
+            <td>
+                {% if not user.is_superuser %}
+                <form method="POST" action="{% url 'toggle_user_status' user.id %}">
+                    {% csrf_token %}
+                    {% if user.is_active %}
+                        <button type="submit">Disable</button>
+                    {% else %}
+                        <button type="submit">Enable</button>
+                    {% endif %}
+                </form>
+                {% else %}
+                <span>N/A</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p><a href="{% url 'admin_profile' %}">Back to Profile</a></p>

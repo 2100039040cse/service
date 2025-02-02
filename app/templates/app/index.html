@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SKS</title>
+    <style>
+        .form-container {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+            width: 300px;
+        }
+    </style>
+    <script>
+        function showForm(formId) {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById(formId).style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to SKS</h1>
+
+    <!-- Display messages -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <button onclick="showForm('login-form')">Login</button>
+    <button onclick="showForm('register-form')">Register</button>
+
+    <!-- Login Form -->
+    <div id="login-form" class="form-container">
+        <h2>Login</h2>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input type="text" name="username" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" onclick="showForm('register-form')">Register here</a></p>
+        <p><a href="{% url 'serlogin' %}">Login as ServiceMember</a></p>
+        <p><a href="{% url 'forgot_password' %}">Forgot Password?</a></p>
+    </div>
+
+    <!-- Register Form -->
+    <div id="register-form" class="form-container">
+        <h2>Register</h2>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input type="text" name="username" required>
+            <label>Email:</label>
+            <input type="email" name="email" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="showForm('login-form')">Login here</a></p>
+    </div>
+</body>
+</html>
