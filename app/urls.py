@@ -23,5 +23,6 @@ urlpatterns = [
     path("staff-profile/", views.staff_profile, name="staff_profile"),
     path("staff_edit_profile/", views.staff_edit_profile, name="staff_edit_profile"),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
